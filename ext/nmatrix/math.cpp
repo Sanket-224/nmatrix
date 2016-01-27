@@ -385,10 +385,11 @@ namespace nm {
           rb_raise(nm_eNotInvertibleError, 
               "matrix must have non-zero determinant to be invertible (not getting this error does not mean matrix is invertible if you're dealing with floating points)");
         }
+        DType x= A[0];
         B[0] = A[lda+1] / det;
         B[1] = -A[1] / det;
         B[ldb] = -A[lda] / det;
-        B[ldb+1] = A[0] / det;
+        B[ldb+1] = x/ det;
 
       } else if (M == 3) {
         // Calculate the exact determinant.
