@@ -438,14 +438,8 @@ namespace nm {
         DType g4=g3;
         B[2*ldb]  = (  d3   * h2 - e2 * g3)   / det; // C = dh - eg
         DType a4=a3;
-        DType h4=h3;
         DType b3=b2;
-        DType g5=g4;
         B[2*ldb+1]= ( -a3     * h3 + b2     * g4)   / det; // F = -ah + bg
-        DType a5=a4;
-        DType e4=e3;
-        DType b4=b3;
-        DType d5=d4;
         B[2*ldb+2]= (  a4     * e3   - b3     * d4)     / det; // I = ae - bd
       } else if (M == 1) {
         B[0] = 1 / A[0];
