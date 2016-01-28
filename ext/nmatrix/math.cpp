@@ -399,16 +399,54 @@ namespace nm {
           rb_raise(nm_eNotInvertibleError, 
               "matrix must have non-zero determinant to be invertible (not getting this error does not mean matrix is invertible if you're dealing with floating points)");
         }
-
+        DType a1= A[0];
+        DType b1= A[1];
+        DType c1= A[2];
+        DType d1= A[lda];
+        DType e1= A[lda+1];
+        DType f1= A[lda+2];
+        DType g1= A[2*lda];
+        DType h1= A[2*lda+1];
+        DType i1= A[2*lda+2];
         B[0]      = (  A[lda+1] * A[2*lda+2] - A[lda+2] * A[2*lda+1]) / det; // A = ei - fh
-        B[1]      = (- A[1]     * A[2*lda+2] + A[2]     * A[2*lda+1]) / det; // D = -bi + ch
-        B[2]      = (  A[1]     * A[lda+2]   - A[2]     * A[lda+1])   / det; // G = bf - ce
-        B[ldb]    = (- A[lda]   * A[2*lda+2] + A[lda+2] * A[2*lda])   / det; // B = -di + fg
-        B[ldb+1]  = (  A[0]     * A[2*lda+2] - A[2]     * A[2*lda])   / det; // E = ai - cg
-        B[ldb+2]  = (- A[0]     * A[lda+2]   + A[2]     * A[lda])     / det; // H = -af + cd
-        B[2*ldb]  = (  A[lda]   * A[2*lda+1] - A[lda+1] * A[2*lda])   / det; // C = dh - eg
-        B[2*ldb+1]= ( -A[0]     * A[2*lda+1] + A[1]     * A[2*lda])   / det; // F = -ah + bg
-        B[2*ldb+2]= (  A[0]     * A[lda+1]   - A[1]     * A[lda])     / det; // I = ae - bd
+        DType i2= i1;
+        DType h2= h1;
+        B[1]      = (- A[1]     * i2 + A[2]     * h2) / det; // D = -bi + ch
+        DType b2= b1;
+        DType f2= f1;
+        DType c2= c1;
+        DType e2= e1;
+        B[2]      = (  b1     * f1   - c1     * e1)   / det; // G = bf - ce
+        DType d2=d1;
+        DType i3=i2;
+        DType f3=f2;
+        DType g2=g1;
+        B[ldb]    = (- d1   * i2 + f2 * g1)   / det; // B = -di + fg
+        DType a2=a1;
+        DType i4=i3;
+        DType c3=c2;
+        DType g3=g2;        
+        B[ldb+1]  = (  a1     * i3 - c2     * g2)   / det; // E = ai - cg
+        DType a3=a2;
+        DType f4=f3;
+        DType c4=c3;
+        DType d3=d2;
+        B[ldb+2]  = (- a2     * f3   + c3     * d2)     / det; // H = -af + cd
+        DType d4=d3;
+        DType h3=h2;
+        DType e3=e2;
+        DType g4=g3;
+        B[2*ldb]  = (  d3   * h2 - e2 * g3)   / det; // C = dh - eg
+        DType a4=a3;
+        DType h4=h3;
+        DType b3=b2;
+        DType g5=g4;
+        B[2*ldb+1]= ( -a3     * h3 + b2     * g4)   / det; // F = -ah + bg
+        DType a5=a4;
+        DType e4=e3;
+        DType b4=b3;
+        DType d5=d4;
+        B[2*ldb+2]= (  a4     * e3   - b3     * d4)     / det; // I = ae - bd
       } else if (M == 1) {
         B[0] = 1 / A[0];
       } else {
