@@ -111,7 +111,7 @@ class NMatrix
       cloned.invert!
     end
   end
-  alias :inverse_exact :invert
+  alias :inverse :invert
 
   #
   # call-seq:
