@@ -81,7 +81,10 @@ class NMatrix
 
     #No internal implementation of getri, so use this other function
     n= self.shape[0]
-    __inverse_exact__(self, n,n)
+    if n<4
+      __inverse_exact__(self, n,n)
+    else
+      __inverse__(self,true)
   end
 
   #
